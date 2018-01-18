@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 
 import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.messages.Messages;
-import com.rafaelsm.desafio.models.Cliente;
-import com.rafaelsm.desafio.repositories.ClienteRepository;
+import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.repositories.ClientRepository;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClientServiceImpl implements ClientService {
 	
 	@Autowired
-	private ClienteRepository repository;
+	private ClientRepository repository;
 	
 	@Override
-	public Page<Cliente> list(Pageable pageable) {
+	public Page<Client> list(Pageable pageable) {
 		return repository.findAll(pageable);
 	}
 
 	@Override
-	public Cliente save(Cliente cliente) throws CustomException {
+	public Client save(Client cliente) throws CustomException {
 		if (repository.findOneByEmail(cliente.getEmail()) != null) {
 			throw new CustomException(Messages.EMAIL_ALREADY_EXISTS);
 		}
@@ -32,13 +32,12 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		cliente.setId(null);
-		Cliente saved = repository.save(cliente);
+		Client saved = repository.save(cliente);
 		return saved;
 	}
 
 	@Override
-	public void update(Long id, Cliente cliente) {
-		// TODO Auto-generated method stub
+	public void update(Long id, Client cliente) {
 		
 	}
 	

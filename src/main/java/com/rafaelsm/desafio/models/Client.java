@@ -18,8 +18,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="clientes")
-public class Cliente {
+@Entity(name="clients")
+public class Client {
 	
 	@Id
 	@GeneratedValue

@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rafaelsm.desafio.exception.CustomException;
-import com.rafaelsm.desafio.models.Cliente;
-import com.rafaelsm.desafio.services.ClienteService;
+import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.services.ClientService;
 
 @RequestMapping(value="api/cliente")
 @RestController
 public class ClienteController {
 	
 	@Autowired
-	private ClienteService service;
+	private ClientService service;
 	
 	@PostMapping
-	public Cliente save(@RequestBody Cliente cliente) throws CustomException {
+	public Client save(@RequestBody Client cliente) throws CustomException {
 		return this.service.save(cliente);
 	}
 	
 	@GetMapping
-	public Page<Cliente> list(@RequestParam(value="page", required=true, defaultValue="0") Integer page,
+	public Page<Client> list(@RequestParam(value="page", required=true, defaultValue="0") Integer page,
 			@RequestParam(value="size", required=true, defaultValue="10") Integer size) {
 		return this.service.list(new PageRequest(page, size));
 	}

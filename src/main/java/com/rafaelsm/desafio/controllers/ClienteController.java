@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.models.Cliente;
 import com.rafaelsm.desafio.services.ClienteService;
 
@@ -21,7 +22,7 @@ public class ClienteController {
 	private ClienteService service;
 	
 	@PostMapping
-	public Cliente save(@RequestBody Cliente cliente) {
+	public Cliente save(@RequestBody Cliente cliente) throws CustomException {
 		return this.service.save(cliente);
 	}
 	

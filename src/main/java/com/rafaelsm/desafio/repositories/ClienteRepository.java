@@ -6,4 +6,8 @@ import com.rafaelsm.desafio.models.Cliente;
 
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Long> {
 	
+	Cliente findOneByEmail(String email);
+	
+	Cliente findOneByCpf(String cpf);
+	
 }

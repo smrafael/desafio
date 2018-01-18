@@ -15,7 +15,7 @@ import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.models.Client;
 import com.rafaelsm.desafio.services.ClientService;
 
-@RequestMapping(value="api/cliente")
+@RequestMapping(value="api/client")
 @RestController
 public class ClienteController {
 	
@@ -29,8 +29,9 @@ public class ClienteController {
 	
 	@GetMapping
 	public Page<Client> list(@RequestParam(value="page", required=true, defaultValue="0") Integer page,
-			@RequestParam(value="size", required=true, defaultValue="10") Integer size) throws CustomException {
-		return this.service.list(page, size);
+			@RequestParam(value="size", required=true, defaultValue="10") Integer size,
+			@RequestParam(value = "search", required=false) String searchQuery) throws CustomException {
+		return this.service.list(page, size, searchQuery);
 	}
 	
 	@PutMapping("/{id}")

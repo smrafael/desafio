@@ -9,7 +9,7 @@ public interface ClientService {
 	
 	// TODO find
 	
-	public Page<Client> list(Integer page, Integer size) throws CustomException;
+	public Page<Client> list(Integer page, Integer size, String searchQuery) throws CustomException;
 	
 	public Client save(Client cliente) throws CustomException;
 	

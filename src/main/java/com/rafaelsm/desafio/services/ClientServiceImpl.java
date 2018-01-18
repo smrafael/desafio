@@ -9,6 +9,7 @@ import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.messages.ErrorMessages;
 import com.rafaelsm.desafio.models.Client;
 import com.rafaelsm.desafio.repositories.ClientRepository;
+import com.rafaelsm.desafio.repositories.specification.ClientSpecificationBuilder;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -17,7 +18,7 @@ public class ClientServiceImpl implements ClientService {
 	private ClientRepository repository;
 	
 	@Override
-	public Page<Client> list(Integer page, Integer size) throws CustomException {
+	public Page<Client> list(Integer page, Integer size, String searchQuery) throws CustomException {
 		if (page < 0) {
 			throw new CustomException(ErrorMessages.PAGE_LESS_THAN_ZERO);
 		}
@@ -30,7 +31,8 @@ public class ClientServiceImpl implements ClientService {
 			throw new CustomException(ErrorMessages.SIZE_BIGGER_THAN_100);
 		}
 		
-		return repository.findAll(new PageRequest(page, size));
+		ClientSpecificationBuilder builder = new ClientSpecificationBuilder(searchQuery);
+		return repository.findAll(builder.build(), new PageRequest(page, size));
 	}
 
 	@Override

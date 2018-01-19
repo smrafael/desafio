@@ -78,10 +78,10 @@ Cadastro de clientes
 }
 ```
  - 400 - Bad Request
-	 - CNPJ ou Email inválidados
+	 - CNPJ ou Email inválidos
 	 - CNPJ já existente
 	 - Email já existente
-	 - Campos obrigatório não preenchidos
+	 - Campos obrigatórios não preenchidos
 
 ## [PUT] /api/cliente
 Atualização de clientes
@@ -150,10 +150,10 @@ Atualização de clientes
 }
 ```
  - 400 - Bad Request
-	 - CNPJ ou Email inválidados
+	 - CNPJ ou Email inválidos
 	 - CNPJ já existente
 	 - Email já existente
-	 - Campos obrigatório não preenchidos
+	 - Campos obrigatórios não preenchidos
 
 ## [GET] /api/cliente?page={page}&size={size}&search={query}
 Pesquisa por clientes baseada em páginas

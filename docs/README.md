@@ -62,20 +62,18 @@ Cadastro de clientes
 	 - Exemplo: <br />
 ```
 {
-	"id": 1,
-	"nomeCompleto": "João da Silva",
-	"sexo": "MASCULINO",
-	"dataNascimento": "17/09/1990",
-	"email": "joaosilva@email.com",
-	"cpf": "873.345.133-80",
-	"endereco": {
-		"id": 1,
+	"id": 1
+	"razaoSocial": "Rafael Mendes",
+	"nomeFantasia": "Rafael Mendes Lanches",
+	"email": "rafael.sm199@gmail.com",
+	"cnpj": "38.961.826/0001-90",
+	"endereco" : {
+		"id": 1
 		"rua": "Rua de lá",
 		"numero": 111,
 		"bairro": "Bairro daqui",
 		"cidade": "João Pessoa",
-		"estado": "PB",
-		"complemento": "102A"
+		"estado": "PB"
 	}
 }
 ```
@@ -97,11 +95,12 @@ Atualização de clientes
 | Campo | Descrição |
 |--|--|
 | id* | ID do cliente que se deseja atualizar |
-| nomeCompleto* | Nome do cliente |
-| sexo* | Sexo do cliente (MASCULINO ou FEMININO) |
-| dataNascimento* | Data de nascimento do cliente no formato <br /> dd/MM/yyyy|
+| nomeFantasia* | Nome fantasia do cliente |
+| razaoSocial* | Razao social do cliente |
 | email* | Email do cliente|
-| cpf* | CPF do cliente no formato ###.###.###-##|
+| cnpj* | CNPJ do cliente no formato ##.###.###/####-##|
+| endereco | |
+| id* | ID do enderenco do cliente |
 | rua* | Rua do cliente |
 | numero* | Número da casa do cliente |
 | bairro* | Bairro do cliente |
@@ -113,19 +112,17 @@ Atualização de clientes
 ```
 {
 	"id": 1
-	"nomeCompleto": "João da Silva e Neto",
-	"sexo": "MASCULINO",
-	"dataNascimento": "17/09/1990",
-	"email": "joaosilva@email.com",
-	"cpf": "873.345.133-80",
-	"endereco": {
-		"id": 1,
+	"razaoSocial": "Rafael Mendes EDITADO",
+	"nomeFantasia": "Rafael Mendes Lanches",
+	"email": "rafael.sm199@gmail.com",
+	"cnpj": "38.961.826/0001-90",
+	"endereco" : {
+		"id": 1
 		"rua": "Rua de lá",
 		"numero": 111,
 		"bairro": "Bairro daqui",
 		"cidade": "João Pessoa",
-		"estado": "PB",
-		"complemento": "102A"
+		"estado": "PB"
 	}
 }
 ```
@@ -139,19 +136,17 @@ Atualização de clientes
 ```
 {
 	"id": 1
-	"nomeCompleto": "João da Silva e Neto",
-	"sexo": "MASCULINO",
-	"dataNascimento": "17/09/1990",
-	"email": "joaosilva@email.com",
-	"cpf": "873.345.133-80",
-	"endereco": {
-		"id": 1,
+	"razaoSocial": "Rafael Mendes EDITADO",
+	"nomeFantasia": "Rafael Mendes Lanches",
+	"email": "rafael.sm199@gmail.com",
+	"cnpj": "38.961.826/0001-90",
+	"endereco" : {
+		"id": 1
 		"rua": "Rua de lá",
 		"numero": 111,
 		"bairro": "Bairro daqui",
 		"cidade": "João Pessoa",
-		"estado": "PB",
-		"complemento": "102A"
+		"estado": "PB"
 	}
 }
 ```
@@ -175,7 +170,7 @@ Pesquisa por clientes baseada em páginas
 | size | Quantidade de clientes por página |
 | search | Query para filtragem dos clientes no <br /> formato "campo1:valor1,campo2:valor2".<br /> Os nomes dos campos devem ser iguais aos<br /> utilizados no cadastro de clientes. |
 
- - Exemplo: `/api/cliente?page=0&size=10&search=nomeCompleto:João,endereco.rua:Rua
+ - Exemplo: `/api/cliente?page=0&size=10&search=nomeFantasia:Rafael,endereco.rua:Rua
 
 
 ### Response
@@ -187,22 +182,20 @@ Pesquisa por clientes baseada em páginas
 {
     "content": [
         {
-            "id": 1,
-            "nomeCompleto": "João da Silva",
-            "sexo": "MASCULINO",
-            "dataNascimento": "1990-09-17",
-            "email": "joaosilva@email.com",
-            "cpf": "873.345.133-80",
-	    "endereco": {
-	    	    "id": 1,
-		    "rua": "Rua de lá",
-		    "numero": 111,
-		    "bairro": "Bairro daqui",
-		    "cidade": "João Pessoa",
-		    "estado": "PB",
-		    "complemento": "102A"
-	    }
-        }
+		"id": 1
+		"razaoSocial": "Rafael Mendes EDITADO",
+		"nomeFantasia": "Rafael Mendes Lanches",
+		"email": "rafael.sm199@gmail.com",
+		"cnpj": "38.961.826/0001-90",
+		"endereco" : {
+			"id": 1
+			"rua": "Rua de lá",
+			"numero": 111,
+			"bairro": "Bairro daqui",
+			"cidade": "João Pessoa",
+			"estado": "PB"
+		}
+	}
     ],
     "last": true,
     "totalElements": 1,

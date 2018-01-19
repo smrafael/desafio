@@ -25,11 +25,11 @@ Cadastro de clientes
  
 | Campo | Descrição |
 |--|--|
-| nomeCompleto* | Nome do cliente |
-| sexo* | Sexo do cliente (MASCULINO ou FEMININO) |
-| dataNascimento* | Data de nascimento do cliente no formato <br /> dd/MM/yyyy|
+| nomeFantasia* | Nome fantasia do cliente |
+| razaoSocial* | Razao social do cliente |
 | email* | Email do cliente|
-| cpf* | CPF do cliente no formato ###.###.###-##|
+| cnpj* | CNPJ do cliente no formato ##.###.###/####-##|
+| endereco | |
 | rua* | Rua do cliente |
 | numero* | Número da casa do cliente |
 | bairro* | Bairro do cliente |
@@ -40,18 +40,16 @@ Cadastro de clientes
  - Exemplo: <br />
 ```
 {
-	"nomeCompleto": "João da Silva",
-	"sexo": "MASCULINO",
-	"dataNascimento": "17/09/1990",
-	"email": "joaosilva@email.com",
-	"cpf": "873.345.133-80",
-	"endereco": {
+	"razaoSocial": "Rafael Mendes",
+	"nomeFantasia": "Rafael Mendes Lanches",
+	"email": "rafael.sm199@gmail.com",
+	"cnpj": "38.961.826/0001-90",
+	"endereco" : {
 		"rua": "Rua de lá",
 		"numero": 111,
 		"bairro": "Bairro daqui",
 		"cidade": "João Pessoa",
-		"estado": "PB",
-		"complemento": "102A"
+		"estado": "PB"
 	}
 }
 ```

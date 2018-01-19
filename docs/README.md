@@ -10,6 +10,8 @@ Uma simples API REST para cadastro de clientes
 	 - File -> Import... -> Existing Maven Projects... -> Browser... -> Finish
  - Run -> Run (ou Ctrl + F11)
 
+A aplicação utiliza o banco de dados h2 por padrão (in-memory). Para utilizar o MySql vá em `src/main/resources/application.properties`, descomente o bloco relacionado ao MySql e comente o bloco do h2.
+
 # API
 Lista dos endpoints disponíveis
 

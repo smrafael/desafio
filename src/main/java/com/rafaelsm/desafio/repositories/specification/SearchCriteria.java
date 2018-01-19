@@ -1,6 +1,9 @@
 package com.rafaelsm.desafio.repositories.specification;
 
 public class SearchCriteria {
+	
+	public static final String querySearchPattern = "((?:\\w+[.]*)+)(:|<|>)((?:\\w*\\s*[.@-]*)+),";
+	
     private String key;
     private String operation;
     private Object value;

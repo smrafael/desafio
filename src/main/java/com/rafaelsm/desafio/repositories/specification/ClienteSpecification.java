@@ -8,29 +8,35 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.rafaelsm.desafio.Constants;
-import com.rafaelsm.desafio.models.Address;
-import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.models.Cliente;
+import com.rafaelsm.desafio.models.Endereco;
 import com.rafaelsm.desafio.models.Estado;
 import com.rafaelsm.desafio.models.Sexo;
 
-public class ClientSpecification implements Specification<Client> {
+public class ClienteSpecification implements Specification<Cliente> {
+	
+	private static final String ADDRESS_FIELD_NAME= "address";
+	private static final String ADDRESS_ESTADO_NAME= "estado";
+	private static final String CLIENT_SEXO_NAME= "sexo";
+	private static final String ADDRESS_JOIN = ADDRESS_FIELD_NAME + ".";
+	
+	private static final String EQUAL_OPERATOR_CRITERIA = ":";
 	
 	private SearchCriteria criteria;
 	
-	public ClientSpecification(SearchCriteria criteria) {
+	public ClienteSpecification(SearchCriteria criteria) {
 		this.criteria = criteria;
 	}
 
 	@Override
-	public Predicate toPredicate(Root<Client> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+	public Predicate toPredicate(Root<Cliente> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		Predicate predicate = null;
 		try {
-			if (criteria.getOperation().equalsIgnoreCase(Constants.EQUAL_OPERATOR_CRITERIA)) {
-				if (criteria.getKey().contains("address.")) {
+			if (criteria.getOperation().equalsIgnoreCase(EQUAL_OPERATOR_CRITERIA)) {
+				if (criteria.getKey().contains(ADDRESS_JOIN)) {
 					predicate = joinAddress(root, cb);
 				
-				} else if (criteria.getKey().equals("sexo")) {
+				} else if (criteria.getKey().equals(CLIENT_SEXO_NAME)) {
 					predicate =  cb.equal(root.get(criteria.getKey()), Sexo.valueOf(criteria.getValue().toString()));
 				
 				} else if (root.get(criteria.getKey()).getJavaType() == String.class) {
@@ -45,11 +51,11 @@ public class ClientSpecification implements Specification<Client> {
 		return predicate;
 	}
 	
-	public Predicate joinAddress(Root<Client> root, CriteriaBuilder cb) {
-		String key = criteria.getKey().replace("address.", "");
-		Join<Client, Address> join = root.join("address");
+	public Predicate joinAddress(Root<Cliente> root, CriteriaBuilder cb) {
+		String key = criteria.getKey().replace(ADDRESS_JOIN, "");
+		Join<Cliente, Endereco> join = root.join(ADDRESS_FIELD_NAME);
 
-		if (key.equals("estado")) {
+		if (key.equals(ADDRESS_ESTADO_NAME)) {
 			return cb.equal(join.get(key), Estado.valueOf(criteria.getValue().toString()));
 		}
 		

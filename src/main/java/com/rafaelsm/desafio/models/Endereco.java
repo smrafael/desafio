@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity(name="adresses")
-public class Address {
+@Entity(name="endereco")
+public class Endereco {
 	
 	@Id
 	@GeneratedValue

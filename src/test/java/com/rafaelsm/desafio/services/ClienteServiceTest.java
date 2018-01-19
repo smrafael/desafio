@@ -26,74 +26,74 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.rafaelsm.desafio.data.ClientData;
 import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.messages.ErrorMessages;
-import com.rafaelsm.desafio.models.Client;
-import com.rafaelsm.desafio.repositories.ClientRepository;
-import com.rafaelsm.desafio.repositories.specification.ClientSpecification;
-import com.rafaelsm.desafio.repositories.specification.ClientSpecificationBuilder;
+import com.rafaelsm.desafio.models.Cliente;
+import com.rafaelsm.desafio.repositories.ClienteRepository;
+import com.rafaelsm.desafio.repositories.specification.ClienteSpecification;
+import com.rafaelsm.desafio.repositories.specification.ClienteSpecificationBuilder;
 import com.rafaelsm.desafio.repositories.specification.SearchCriteria;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ClientServiceTest {
+public class ClienteServiceTest {
 	
 	@TestConfiguration
 	static class ClientServiceTestConfiguration {
 		
 		@Bean
-		public ClientService clientService() {
-			return new ClientServiceImpl();
+		public ClienteService clientService() {
+			return new ClienteServiceImpl();
 		}
 	}
 	
 	@MockBean
-	private ClientRepository repository;
+	private ClienteRepository repository;
 	
 	@MockBean
-	private ClientSpecificationBuilder builder;
+	private ClienteSpecificationBuilder builder;
 	
 	@Autowired 
-	private ClientServiceImpl service;
+	private ClienteServiceImpl service;
 	
 	@Before
 	public void init() {
 		PageRequest pageReq = new PageRequest(0, 5);
 		
 		// Mock for whenList_thenReturnListOfClients
-		Page<Client> page = new PageImpl<>(ClientData.all(), pageReq, 5);
+		Page<Cliente> page = new PageImpl<>(ClientData.all(), pageReq, 5);
 		Mockito.when(repository.findAll(null, pageReq)).thenReturn(page);
 		
 		// Mock givenNomeCompleto_whenList_thenReturnClient and givenNomeEmail_whenList_thenReturnClient
-		Page<Client> pageRafael = new PageImpl<>(Arrays.asList(ClientData.getRafael()), pageReq, 1);
+		Page<Cliente> pageRafael = new PageImpl<>(Arrays.asList(ClientData.getRafael()), pageReq, 1);
 		SearchCriteria criteriaNomeCompleto = new SearchCriteria("nomeCompleto", ":", "Rafael");
 		SearchCriteria criteriaEmail = new SearchCriteria("email", ":", "rafael.sm1990@gmail.com");
-		Specification<Client> specNome = Specifications.where(new ClientSpecification(criteriaNomeCompleto));
-		Specification<Client> specNomeEmail = Specifications.where(new ClientSpecification(criteriaNomeCompleto)).and(new ClientSpecification(criteriaEmail));
+		Specification<Cliente> specNome = Specifications.where(new ClienteSpecification(criteriaNomeCompleto));
+		Specification<Cliente> specNomeEmail = Specifications.where(new ClienteSpecification(criteriaNomeCompleto)).and(new ClienteSpecification(criteriaEmail));
 		Mockito.when(builder.build("nomeCompleto:Rafael")).thenReturn(specNome);
 		Mockito.when(builder.build("nomeCompleto:Rafael,email:rafael.sm1990@gmail.com")).thenReturn(specNomeEmail);
 		Mockito.when(repository.findAll(builder.build("nomeCompleto:Rafael"), pageReq)).thenReturn(pageRafael);
 		Mockito.when(repository.findAll(builder.build("nomeCompleto:Rafael,email:rafael.sm1990@gmail.com"), pageReq)).thenReturn(pageRafael);
 		
 		// Mock givenEstado_whenList_thenReturnTwoClients
-		Page<Client> pageTwoClients = new PageImpl<>(Arrays.asList(ClientData.getRafael(), ClientData.getPamella()), pageReq, 2);
+		Page<Cliente> pageTwoClients = new PageImpl<>(Arrays.asList(ClientData.getRafael(), ClientData.getPamella()), pageReq, 2);
 		SearchCriteria criteriaEstado = new SearchCriteria("estado", ":", "PB");
-		Specification<Client> specEstado = Specifications.where(new ClientSpecification(criteriaEstado));
+		Specification<Cliente> specEstado = Specifications.where(new ClienteSpecification(criteriaEstado));
 		Mockito.when(builder.build("estado:PB")).thenReturn(specEstado);
 		Mockito.when(repository.findAll(builder.build("estado:PB"), pageReq)).thenReturn(pageTwoClients);
 		
 		// Mock givenEstado_whenList_thenReturnNoneClients
-		Page<Client> pageNone = new PageImpl<>(new ArrayList<>(), pageReq, 0);
+		Page<Cliente> pageNone = new PageImpl<>(new ArrayList<>(), pageReq, 0);
 		SearchCriteria criteriaEstadoDF = new SearchCriteria("estado", ":", "DF");
-		Specification<Client> specEstadoDF = Specifications.where(new ClientSpecification(criteriaEstadoDF));
+		Specification<Cliente> specEstadoDF = Specifications.where(new ClienteSpecification(criteriaEstadoDF));
 		Mockito.when(builder.build("estado:DF")).thenReturn(specEstadoDF);
 		Mockito.when(repository.findAll(builder.build("estado:DF"), pageReq)).thenReturn(pageNone);
 	}
 	
 	@Test
 	public void whenList_thenReturnListOfClients() throws CustomException {
-		Page<Client> page = service.list(0, 5, null);
+		Page<Cliente> page = service.list(0, 5, null);
 		assertThat(page.getTotalElements()).isEqualTo(5);
 		
-		List<Client> clients = page.getContent();
+		List<Cliente> clients = page.getContent();
 		assertThat(ClientData.getRafael()).isIn(clients);
 		
 	}
@@ -130,42 +130,42 @@ public class ClientServiceTest {
 	
 	@Test
 	public void givenNomeCompleto_whenList_thenReturnClient() throws CustomException {
-		Page<Client> page = service.list(0, 5, "nomeCompleto:Rafael");
+		Page<Cliente> page = service.list(0, 5, "nomeCompleto:Rafael");
 		assertThat(page.getTotalElements()).isEqualTo(1);
 		
-		List<Client> clients = page.getContent();
+		List<Cliente> clients = page.getContent();
 		assertThat(ClientData.getRafael()).isIn(clients);
 	}
 	
 	@Test
 	public void givenNomeEmail_whenList_thenReturnClient() throws CustomException {
-		Page<Client> page = service.list(0, 5, "nomeCompleto:Rafael,email:rafael.sm1990@gmail.com");
+		Page<Cliente> page = service.list(0, 5, "nomeCompleto:Rafael,email:rafael.sm1990@gmail.com");
 		assertThat(page.getTotalElements()).isEqualTo(1);
 		
-		List<Client> clients = page.getContent();
+		List<Cliente> clients = page.getContent();
 		assertThat(ClientData.getRafael()).isIn(clients);
 	}
 	
 	@Test
 	public void givenEstado_whenList_thenReturnTwoClients() throws CustomException {
-		Page<Client> page = service.list(0, 5, "estado:PB");
+		Page<Cliente> page = service.list(0, 5, "estado:PB");
 		assertThat(page.getTotalElements()).isEqualTo(2);
 		
-		List<Client> clients = page.getContent();
+		List<Cliente> clients = page.getContent();
 		assertThat(ClientData.getRafael()).isIn(clients);
 		assertThat(ClientData.getPamella()).isIn(clients);
 	}
 	
 	@Test
 	public void givenEstado_whenList_thenReturnNoneClients() throws CustomException {
-		Page<Client> page = service.list(0, 5, "estado:DF");
+		Page<Cliente> page = service.list(0, 5, "estado:DF");
 		assertThat(page.getTotalElements()).isEqualTo(0);
 	}
 	
 	@Test
 	public void whenSave_thenReturnNewClient() throws CustomException {
 		Mockito.when(repository.save(ClientData.getNewUser())).thenReturn(ClientData.getNewUserSaved());
-		Client saved = service.save(ClientData.getNewUser());
+		Cliente saved = service.save(ClientData.getNewUser());
 		
 		assertThat(saved).isEqualTo(ClientData.getNewUserSaved());
 	}
@@ -175,7 +175,7 @@ public class ClientServiceTest {
 		Mockito.when(repository.findOneByCpf(ClientData.getNewUserSaved().getCpf())).thenReturn(ClientData.getNewUserSaved());
 		
 		try {
-			Client newUser = ClientData.getNewUser();
+			Cliente newUser = ClientData.getNewUser();
 			newUser.setCpf(ClientData.getNewUserSaved().getCpf());
 			service.save(newUser);
 			fail("CustomException expected to be throw");
@@ -189,7 +189,7 @@ public class ClientServiceTest {
 		Mockito.when(repository.findOneByEmail(ClientData.getNewUserSaved().getEmail())).thenReturn(ClientData.getNewUserSaved());
 		
 		try {
-			Client newUser = ClientData.getNewUser();
+			Cliente newUser = ClientData.getNewUser();
 			newUser.setEmail(ClientData.getNewUserSaved().getEmail());
 			service.save(newUser);
 			fail("CustomException expected to be throw");
@@ -200,15 +200,15 @@ public class ClientServiceTest {
 	
 	@Test
 	public void whenUpdate_thenReturnClient() throws CustomException {
-		Client userModifiedBD = ClientData.getNewUserSaved();
-		userModifiedBD.getAddress().setBairro("UPDATED!");
+		Cliente userModifiedBD = ClientData.getNewUserSaved();
+		userModifiedBD.getEndereco().setBairro("UPDATED!");
 		Mockito.when(repository.findOne(ClientData.getNewUserSaved().getId())).thenReturn(ClientData.getNewUserSaved());
 		Mockito.when(repository.save(userModifiedBD)).thenReturn(userModifiedBD);
 		
-		Client user = ClientData.getNewUserSaved();
-		user.getAddress().setBairro("UPDATED!");
+		Cliente user = ClientData.getNewUserSaved();
+		user.getEndereco().setBairro("UPDATED!");
 		
-		Client saved = service.update(user.getId(), user);
+		Cliente saved = service.update(user.getId(), user);
 		assertThat(saved).isEqualTo(userModifiedBD);
 	}
 	
@@ -216,8 +216,8 @@ public class ClientServiceTest {
 	public void givenInexistentId_whenUpdate_expectExcption() {
 		Mockito.when(repository.findOne(2L)).thenReturn(null);
 		try {
-			Client user = ClientData.getNewUserSaved();
-			user.getAddress().setBairro("UPDATED!");
+			Cliente user = ClientData.getNewUserSaved();
+			user.getEndereco().setBairro("UPDATED!");
 			service.update(2L, user);
 			fail("CustomException expected to be throw");
 		} catch (CustomException e) {

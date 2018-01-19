@@ -20,8 +20,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="clients")
-public class Client {
+@Entity(name="cliente")
+public class Cliente {
 	
 	@Id
 	@GeneratedValue
@@ -50,7 +50,7 @@ public class Client {
 	private String cpf;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Address address;
+	private Endereco endereco;
 
 	public Long getId() {
 		return id;
@@ -100,12 +100,12 @@ public class Client {
 		this.cpf = cpf;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setEndereco(Endereco address) {
+		this.endereco = address;
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class Client {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Cliente other = (Cliente) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;

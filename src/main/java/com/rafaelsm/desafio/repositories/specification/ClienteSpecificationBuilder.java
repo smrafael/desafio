@@ -9,24 +9,24 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
 
-import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.models.Cliente;
 
 @Component
-public class ClientSpecificationBuilder {
+public class ClienteSpecificationBuilder {
 	
-	public Specification<Client> build(String searchQuery) {
+	public Specification<Cliente> build(String searchQuery) {
 		List<SearchCriteria> params = processSearchQuery(searchQuery);
 		return build(params);
 	}
 	
-	public Specification<Client> build(List<SearchCriteria> params) {
+	public Specification<Cliente> build(List<SearchCriteria> params) {
 		if (params.size() == 0) {
 			return null;
 		}
 		
-		List<Specification<Client>> specs = new ArrayList<Specification<Client>>();
+		List<Specification<Cliente>> specs = new ArrayList<Specification<Cliente>>();
 		for (SearchCriteria param : params) {
-			specs.add(new ClientSpecification(param));
+			specs.add(new ClienteSpecification(param));
 		}
 		
 		return processSpecification(specs);
@@ -35,7 +35,7 @@ public class ClientSpecificationBuilder {
 	private List<SearchCriteria> processSearchQuery(String searchQuery) {
 		List<SearchCriteria> params = new ArrayList<>();
 		if (searchQuery != null && !searchQuery.trim().isEmpty()) {
-			Pattern pattern = Pattern.compile("((?:\\w+[.]*)+)(:|<|>)((?:\\w*\\s*[.@-]*)+),");
+			Pattern pattern = Pattern.compile(SearchCriteria.querySearchPattern);
 			Matcher matcher = pattern.matcher(searchQuery + ",");
 			while (matcher.find()) {
 				String key = matcher.group(1);
@@ -47,8 +47,8 @@ public class ClientSpecificationBuilder {
 		return params;
 	}
 	
-	private Specification<Client> processSpecification(List<Specification<Client>> specs) {
-		Specification<Client> result = specs.get(0);
+	private Specification<Cliente> processSpecification(List<Specification<Cliente>> specs) {
+		Specification<Cliente> result = specs.get(0);
 		for (int i = 1; i < specs.size(); i++) {
 			result = Specifications.where(result).and(specs.get(i));
 		}

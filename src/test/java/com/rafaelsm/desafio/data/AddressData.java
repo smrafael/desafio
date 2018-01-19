@@ -1,18 +1,12 @@
 package com.rafaelsm.desafio.data;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-import com.rafaelsm.desafio.models.Address;
-import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.models.Endereco;
 import com.rafaelsm.desafio.models.Estado;
-import com.rafaelsm.desafio.models.Sexo;
 
 public class AddressData {
 	
-	public static Address getRafael() {
-		Address address = new Address();
+	public static Endereco getRafael() {
+		Endereco address = new Endereco();
 		address.setRua("Rua Rafael");
 		address.setNumero(295);
 		address.setBairro("Bairro Rafael");
@@ -22,8 +16,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getDaniel() {
-		Address address = new Address();
+	public static Endereco getDaniel() {
+		Endereco address = new Endereco();
 		address.setRua("Rua Daniel");
 		address.setNumero(21);
 		address.setBairro("Bairro Daniel");
@@ -33,8 +27,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getPamella() {
-		Address address = new Address();
+	public static Endereco getPamella() {
+		Endereco address = new Endereco();
 		address.setRua("Rua Pamella");
 		address.setNumero(15);
 		address.setBairro("Bairro Pamella");
@@ -44,8 +38,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getPedro() {
-		Address address = new Address();
+	public static Endereco getPedro() {
+		Endereco address = new Endereco();
 		address.setRua("Rua Pedro");
 		address.setNumero(80);
 		address.setBairro("Bairro Pedro");
@@ -55,8 +49,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getCamila() {
-		Address address = new Address();
+	public static Endereco getCamila() {
+		Endereco address = new Endereco();
 		address.setRua("Rua Camila");
 		address.setNumero(73);
 		address.setBairro("Bairro Camila");
@@ -66,8 +60,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getNewUser() {
-		Address address = new Address();
+	public static Endereco getNewUser() {
+		Endereco address = new Endereco();
 		address.setRua("Rua New User");
 		address.setNumero(21);
 		address.setBairro("Bairro New User");
@@ -77,8 +71,8 @@ public class AddressData {
 		return address;
 	}
 	
-	public static Address getNewUserSaved() {
-		Address adress = new Address();
+	public static Endereco getNewUserSaved() {
+		Endereco adress = new Endereco();
 		adress.setRua("Rua New User");
 		adress.setNumero(21);
 		adress.setBairro("Bairro New User");

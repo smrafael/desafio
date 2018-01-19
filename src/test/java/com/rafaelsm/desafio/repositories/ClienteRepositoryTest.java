@@ -10,14 +10,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.rafaelsm.desafio.data.ClientData;
-import com.rafaelsm.desafio.models.Client;
+import com.rafaelsm.desafio.models.Cliente;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ClientRepositoryTest {
+public class ClienteRepositoryTest {
 	
 	@Autowired
-	private ClientRepository repository;
+	private ClienteRepository repository;
 	
 	@Before
 	public void init() {
@@ -30,8 +30,8 @@ public class ClientRepositoryTest {
 	
 	@Test
 	public void whenFindByEmail_thenReturnClient() {
-		Client pamella = ClientData.getPamella();
-		Client clientDB = repository.findOneByEmail(pamella.getEmail());
+		Cliente pamella = ClientData.getPamella();
+		Cliente clientDB = repository.findOneByEmail(pamella.getEmail());
 		
 		assertThat(clientDB.getNomeCompleto()).isEqualTo(pamella.getNomeCompleto());
 		assertThat(clientDB.getCpf()).isEqualTo(pamella.getCpf());
@@ -39,8 +39,8 @@ public class ClientRepositoryTest {
 	
 	@Test
 	public void whenFindByCpf_thenReturnClient() {
-		Client pamella = ClientData.getPamella();
-		Client clientDB = repository.findOneByCpf(pamella.getCpf());
+		Cliente pamella = ClientData.getPamella();
+		Cliente clientDB = repository.findOneByCpf(pamella.getCpf());
 		
 		assertThat(clientDB.getNomeCompleto()).isEqualTo(pamella.getNomeCompleto());
 		assertThat(clientDB.getCpf()).isEqualTo(pamella.getCpf());
@@ -48,13 +48,13 @@ public class ClientRepositoryTest {
 	
 	@Test
 	public void whenFindByEmail_thenReturnNoneClient() {
-		Client clientDB = repository.findOneByEmail("email_inexistente@gmail.com");
+		Cliente clientDB = repository.findOneByEmail("email_inexistente@gmail.com");
 		assertThat(clientDB).isNull();
 	}
 	
 	@Test
 	public void whenFindByCpf_thenReturnNoneClient() {
-		Client clientDB = repository.findOneByCpf("166.238.561-70");
+		Cliente clientDB = repository.findOneByCpf("166.238.561-70");
 		assertThat(clientDB).isNull();
 	}
 

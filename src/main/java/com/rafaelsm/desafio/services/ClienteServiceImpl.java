@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.rafaelsm.desafio.exception.CustomException;
 import com.rafaelsm.desafio.messages.ErrorMessages;
 import com.rafaelsm.desafio.models.Cliente;
+import com.rafaelsm.desafio.models.Endereco;
 import com.rafaelsm.desafio.repositories.ClienteRepository;
 import com.rafaelsm.desafio.repositories.specification.ClienteSpecificationBuilder;
 
@@ -55,6 +56,7 @@ public class ClienteServiceImpl implements ClienteService {
 		
 		client.setId(clientDB.getId());
 		validate(client);
+		validateUpdate(client, clientDB);
 		
 		return repository.save(client);
 	}
@@ -68,6 +70,14 @@ public class ClienteServiceImpl implements ClienteService {
 		clientDB = repository.findOneByCpf(client.getCpf());
 		if (clientDB != null && !clientDB.getId().equals(client.getId())) {
 			throw new CustomException(ErrorMessages.CPF_ALREADY_EXISTS);
+		}
+	}
+	
+	private void validateUpdate(Cliente client, Cliente clientDB) throws CustomException {
+		Endereco endereco = client.getEndereco();
+		Endereco enderecoDB = clientDB.getEndereco();
+		if (endereco != null && (endereco.getId() == null || !endereco.getId().equals(enderecoDB.getId()))) {
+			throw new CustomException(ErrorMessages.UNKNOWN_ADDRESS);
 		}
 	}
 	

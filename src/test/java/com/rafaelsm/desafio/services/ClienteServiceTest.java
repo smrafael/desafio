@@ -104,7 +104,7 @@ public class ClienteServiceTest {
 			service.list(0, -1, null);
 			fail("CustomException expected to be throw");
 		} catch (CustomException e) {
-			assertThat(e.getMessage()).isEqualTo(ErrorMessages.SIZE_LESS_THAN_ZERO);
+			assertThat(e.getMessage()).isEqualTo(ErrorMessages.SIZE_LESS_THAN_ONE);
 		}
 	}
 	

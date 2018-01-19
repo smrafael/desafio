@@ -175,7 +175,7 @@ Pesquisa por clientes baseada em páginas
 | size | Quantidade de clientes por página |
 | search | Query para filtragem dos clientes no <br /> formato "campo1:valor1,campo2:valor2".<br /> Os nomes dos campos devem ser iguais aos<br /> utilizados no cadastro de clientes. |
 
- - Exemplo: `/api/cliente?page=0&size=10&search=nomeCompleto:Joao`
+ - Exemplo: `/api/cliente?page=0&size=10&search=nomeCompleto:João,endereco.rua:Rua
 
 
 ### Response

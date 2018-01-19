@@ -201,12 +201,12 @@ public class ClientServiceTest {
 	@Test
 	public void whenUpdate_thenReturnClient() throws CustomException {
 		Client userModifiedBD = ClientData.getNewUserSaved();
-		userModifiedBD.setBairro("UPDATED!");
+		userModifiedBD.getAddress().setBairro("UPDATED!");
 		Mockito.when(repository.findOne(ClientData.getNewUserSaved().getId())).thenReturn(ClientData.getNewUserSaved());
 		Mockito.when(repository.save(userModifiedBD)).thenReturn(userModifiedBD);
 		
 		Client user = ClientData.getNewUserSaved();
-		user.setBairro("UPDATED!");
+		user.getAddress().setBairro("UPDATED!");
 		
 		Client saved = service.update(user.getId(), user);
 		assertThat(saved).isEqualTo(userModifiedBD);
@@ -217,7 +217,7 @@ public class ClientServiceTest {
 		Mockito.when(repository.findOne(2L)).thenReturn(null);
 		try {
 			Client user = ClientData.getNewUserSaved();
-			user.setBairro("UPDATED!");
+			user.getAddress().setBairro("UPDATED!");
 			service.update(2L, user);
 			fail("CustomException expected to be throw");
 		} catch (CustomException e) {

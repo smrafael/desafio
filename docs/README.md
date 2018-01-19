@@ -78,9 +78,8 @@ Cadastro de clientes
 }
 ```
  - 400 - Bad Request
-	 - CPF ou Email inválidados
-	 - CPF já existente
-	 - Data inválida
+	 - CNPJ ou Email inválidados
+	 - CNPJ já existente
 	 - Email já existente
 	 - Campos obrigatório não preenchidos
 
@@ -151,9 +150,8 @@ Atualização de clientes
 }
 ```
  - 400 - Bad Request
-	 - CPF ou Email inválidados
-	 - CPF já existente
-	 - Data inválida
+	 - CNPJ ou Email inválidados
+	 - CNPJ já existente
 	 - Email já existente
 	 - Campos obrigatório não preenchidos
 

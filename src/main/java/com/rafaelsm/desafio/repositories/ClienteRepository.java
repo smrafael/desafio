@@ -9,6 +9,6 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, L
 	
 	Cliente findOneByEmail(String email);
 	
-	Cliente findOneByCpf(String cpf);
+	Cliente findOneByCnpj(String cnpj);
 	
 }

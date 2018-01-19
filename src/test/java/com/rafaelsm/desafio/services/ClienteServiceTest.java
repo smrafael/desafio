@@ -171,16 +171,16 @@ public class ClienteServiceTest {
 	}
 	
 	@Test
-	public void givenAlreadyExistsCpf_whenSave_expectException() throws CustomException {
-		Mockito.when(repository.findOneByCpf(ClientData.getNewUserSaved().getCpf())).thenReturn(ClientData.getNewUserSaved());
+	public void givenAlreadyExistsCnpj_whenSave_expectException() throws CustomException {
+		Mockito.when(repository.findOneByCnpj(ClientData.getNewUserSaved().getCnpj())).thenReturn(ClientData.getNewUserSaved());
 		
 		try {
 			Cliente newUser = ClientData.getNewUser();
-			newUser.setCpf(ClientData.getNewUserSaved().getCpf());
+			newUser.setCnpj(ClientData.getNewUserSaved().getCnpj());
 			service.save(newUser);
 			fail("CustomException expected to be throw");
 		} catch (CustomException e) {
-			assertThat(e.getMessage()).isEqualTo(ErrorMessages.CPF_ALREADY_EXISTS);
+			assertThat(e.getMessage()).isEqualTo(ErrorMessages.CNPJ_ALREADY_EXISTS);
 		}
 	}
 	

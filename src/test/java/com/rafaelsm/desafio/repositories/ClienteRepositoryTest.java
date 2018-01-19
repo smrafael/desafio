@@ -33,17 +33,17 @@ public class ClienteRepositoryTest {
 		Cliente pamella = ClientData.getPamella();
 		Cliente clientDB = repository.findOneByEmail(pamella.getEmail());
 		
-		assertThat(clientDB.getNomeCompleto()).isEqualTo(pamella.getNomeCompleto());
-		assertThat(clientDB.getCpf()).isEqualTo(pamella.getCpf());
+		assertThat(clientDB.getRazaoSocial()).isEqualTo(pamella.getRazaoSocial());
+		assertThat(clientDB.getCnpj()).isEqualTo(pamella.getCnpj());
 	}
 	
 	@Test
 	public void whenFindByCpf_thenReturnClient() {
 		Cliente pamella = ClientData.getPamella();
-		Cliente clientDB = repository.findOneByCpf(pamella.getCpf());
+		Cliente clientDB = repository.findOneByCnpj(pamella.getCnpj());
 		
-		assertThat(clientDB.getNomeCompleto()).isEqualTo(pamella.getNomeCompleto());
-		assertThat(clientDB.getCpf()).isEqualTo(pamella.getCpf());
+		assertThat(clientDB.getRazaoSocial()).isEqualTo(pamella.getRazaoSocial());
+		assertThat(clientDB.getCnpj()).isEqualTo(pamella.getCnpj());
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class ClienteRepositoryTest {
 	
 	@Test
 	public void whenFindByCpf_thenReturnNoneClient() {
-		Cliente clientDB = repository.findOneByCpf("166.238.561-70");
+		Cliente clientDB = repository.findOneByCnpj("166.238.561-70");
 		assertThat(clientDB).isNull();
 	}
 

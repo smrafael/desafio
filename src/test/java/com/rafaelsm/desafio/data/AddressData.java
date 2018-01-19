@@ -73,6 +73,7 @@ public class AddressData {
 	
 	public static Endereco getNewUserSaved() {
 		Endereco adress = new Endereco();
+		adress.setId(1L);
 		adress.setRua("Rua New User");
 		adress.setNumero(21);
 		adress.setBairro("Bairro New User");

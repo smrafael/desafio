@@ -67,9 +67,9 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new CustomException(ErrorMessages.EMAIL_ALREADY_EXISTS);
 		}
 		
-		clientDB = repository.findOneByCpf(client.getCpf());
+		clientDB = repository.findOneByCnpj(client.getCnpj());
 		if (clientDB != null && !clientDB.getId().equals(client.getId())) {
-			throw new CustomException(ErrorMessages.CPF_ALREADY_EXISTS);
+			throw new CustomException(ErrorMessages.CNPJ_ALREADY_EXISTS);
 		}
 	}
 	

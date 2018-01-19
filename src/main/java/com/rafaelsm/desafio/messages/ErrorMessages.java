@@ -5,7 +5,7 @@ public class ErrorMessages {
 	// Client Messages
 	public static final String CLIENT_NOT_FOUNT = "Cliente não encontrado";
 	public static final String EMAIL_ALREADY_EXISTS = "Email já utilizado";
-	public static final String CPF_ALREADY_EXISTS = "CPF já utilizado";
+	public static final String CNPJ_ALREADY_EXISTS = "CNPJ já utilizado";
 	public static final String UNKNOWN_ADDRESS = "Endereço desconhecido";
 	
 	// Pagination Messages

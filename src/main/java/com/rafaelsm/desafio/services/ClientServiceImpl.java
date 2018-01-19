@@ -17,6 +17,9 @@ public class ClientServiceImpl implements ClientService {
 	@Autowired
 	private ClientRepository repository;
 	
+	@Autowired
+	private ClientSpecificationBuilder builder;
+	
 	@Override
 	public Page<Client> list(Integer page, Integer size, String searchQuery) throws CustomException {
 		if (page < 0) {
@@ -31,8 +34,7 @@ public class ClientServiceImpl implements ClientService {
 			throw new CustomException(ErrorMessages.SIZE_BIGGER_THAN_100);
 		}
 		
-		ClientSpecificationBuilder builder = new ClientSpecificationBuilder(searchQuery);
-		return repository.findAll(builder.build(), new PageRequest(page, size));
+		return repository.findAll(builder.build(searchQuery), new PageRequest(page, size));
 	}
 
 	@Override

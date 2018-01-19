@@ -13,7 +13,7 @@ Uma simples API REST para cadastro de clientes
 # API
 Lista dos endpoints disponíveis
 
-## [POST] /api/client
+## [POST] /api/cliente
 Cadastro de clientes
 
 ### Request
@@ -43,12 +43,14 @@ Cadastro de clientes
 	"dataNascimento": "17/09/1990",
 	"email": "joaosilva@email.com",
 	"cpf": "873.345.133-80",
-	"rua": "Rua de lá",
-	"numero": 111,
-	"bairro": "Bairro daqui",
-	"cidade": "João Pessoa",
-	"estado": "PB",
-	"complemento": "102A"
+	"endereco": {
+		"rua": "Rua de lá",
+		"numero": 111,
+		"bairro": "Bairro daqui",
+		"cidade": "João Pessoa",
+		"estado": "PB",
+		"complemento": "102A"
+	}
 }
 ```
 
@@ -66,12 +68,15 @@ Cadastro de clientes
 	"dataNascimento": "17/09/1990",
 	"email": "joaosilva@email.com",
 	"cpf": "873.345.133-80",
-	"rua": "Rua de lá",
-	"numero": 111,
-	"bairro": "Bairro daqui",
-	"cidade": "João Pessoa",
-	"estado": "PB",
-	"complemento": "102A"
+	"endereco": {
+		"id": 1,
+		"rua": "Rua de lá",
+		"numero": 111,
+		"bairro": "Bairro daqui",
+		"cidade": "João Pessoa",
+		"estado": "PB",
+		"complemento": "102A"
+	}
 }
 ```
  - 400 - Bad Request
@@ -81,7 +86,7 @@ Cadastro de clientes
 	 - Email já existente
 	 - Campos obrigatório não preenchidos
 
-## [PUT] /api/client
+## [PUT] /api/cliente
 Atualização de clientes
 
 ### Request
@@ -113,12 +118,15 @@ Atualização de clientes
 	"dataNascimento": "17/09/1990",
 	"email": "joaosilva@email.com",
 	"cpf": "873.345.133-80",
-	"rua": "Rua de lá",
-	"numero": 111,
-	"bairro": "Bairro daqui",
-	"cidade": "João Pessoa",
-	"estado": "PB",
-	"complemento": "102A"
+	"endereco": {
+		"id": 1,
+		"rua": "Rua de lá",
+		"numero": 111,
+		"bairro": "Bairro daqui",
+		"cidade": "João Pessoa",
+		"estado": "PB",
+		"complemento": "102A"
+	}
 }
 ```
 
@@ -136,12 +144,15 @@ Atualização de clientes
 	"dataNascimento": "17/09/1990",
 	"email": "joaosilva@email.com",
 	"cpf": "873.345.133-80",
-	"rua": "Rua de lá",
-	"numero": 111,
-	"bairro": "Bairro daqui",
-	"cidade": "João Pessoa",
-	"estado": "PB",
-	"complemento": "102A"
+	"endereco": {
+		"id": 1,
+		"rua": "Rua de lá",
+		"numero": 111,
+		"bairro": "Bairro daqui",
+		"cidade": "João Pessoa",
+		"estado": "PB",
+		"complemento": "102A"
+	}
 }
 ```
  - 400 - Bad Request
@@ -151,7 +162,7 @@ Atualização de clientes
 	 - Email já existente
 	 - Campos obrigatório não preenchidos
 
-## [GET] /api/client?page={page}&size={size}&search={query}
+## [GET] /api/cliente?page={page}&size={size}&search={query}
 Pesquisa por clientes baseada em páginas
 
 ### Request
@@ -164,7 +175,7 @@ Pesquisa por clientes baseada em páginas
 | size | Quantidade de clientes por página |
 | search | Query para filtragem dos clientes no <br /> formato "campo1:valor1,campo2:valor2".<br /> Os nomes dos campos devem ser iguais aos<br /> utilizados no cadastro de clientes. |
 
- - Exemplo: `/api/client?page=0&size=10&search=nomeCompleto:Joao`
+ - Exemplo: `/api/cliente?page=0&size=10&search=nomeCompleto:João,endereco.rua:Rua
 
 
 ### Response
@@ -182,12 +193,15 @@ Pesquisa por clientes baseada em páginas
             "dataNascimento": "1990-09-17",
             "email": "joaosilva@email.com",
             "cpf": "873.345.133-80",
-            "rua": "Rua de lá",
-            "numero": 111,
-            "bairro": "Bairro daqui",
-            "cidade": "João Pessoa",
-            "estado": "PB",
-            "complemento": "102A"
+	    "endereco": {
+	    	    "id": 1,
+		    "rua": "Rua de lá",
+		    "numero": 111,
+		    "bairro": "Bairro daqui",
+		    "cidade": "João Pessoa",
+		    "estado": "PB",
+		    "complemento": "102A"
+	    }
         }
     ],
     "last": true,

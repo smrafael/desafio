@@ -39,7 +39,7 @@ public class ClientSpecificationBuilder {
 	private List<SearchCriteria> processSearchQuery(String searchQuery) {
 		List<SearchCriteria> params = new ArrayList<>();
 		if (searchQuery != null && !searchQuery.trim().isEmpty()) {
-			Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)((\\w*\\s*)+),");
+			Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)((\\w*\\s*[.@-]*)+),");
 			Matcher matcher = pattern.matcher(searchQuery + ",");
 			while (matcher.find()) {
 				String key = matcher.group(1);

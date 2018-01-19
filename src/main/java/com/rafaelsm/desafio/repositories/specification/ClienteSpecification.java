@@ -15,7 +15,7 @@ import com.rafaelsm.desafio.models.Sexo;
 
 public class ClienteSpecification implements Specification<Cliente> {
 	
-	private static final String ADDRESS_FIELD_NAME= "address";
+	private static final String ADDRESS_FIELD_NAME= "endereco";
 	private static final String ADDRESS_ESTADO_NAME= "estado";
 	private static final String CLIENT_SEXO_NAME= "sexo";
 	private static final String ADDRESS_JOIN = ADDRESS_FIELD_NAME + ".";
